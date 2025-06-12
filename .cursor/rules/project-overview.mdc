@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 提示词管理平台 - 项目总览
+
+## 项目架构
+本项目是一个现代化的提示词管理平台，采用前后端分离架构：
+
+### 技术栈
+- **前端**: Vue 3 + TypeScript + Vite + Tailwind CSS + Magic UI
+- **后端**: FastAPI + Python + SQLAlchemy + PostgreSQL
+- **AI集成**: MCP (Model Context Protocol) 服务
+- **状态管理**: Pinia
+- **UI组件**: Magic UI + Font Awesome 图标
+
+### 核心功能模块
+1. **用户管理系统** - 用户注册、登录、个人中心
+2. **提示词创建与管理** - CRUD操作、版本控制
+3. **提示词分类系统** - 多维度分类、标签管理
+4. **评分与精选机制** - 用户评分、官方精选
+5. **MCP服务集成** - 个人和平台提示词API访问
+6. **搜索与筛选** - 智能搜索、多条件筛选
+
+### 项目结构
+```
+prompt-ai/
+├── frontend/          # Vue 3 前端应用
+├── backend/           # FastAPI 后端应用
+├── mcp-service/       # MCP 服务实现
+├── docs/             # 项目文档
+└── deploy/           # 部署配置
+```
+
+## 设计原则
+- **简洁性**: 优先使用简单可控的解决方案
+- **可扩展性**: 模块化设计，便于功能扩展
+- **用户体验**: 参考 21st.dev 的现代化UI设计
+- **代码质量**: 遵循SOLID原则，完善的注释和错误处理

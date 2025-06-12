@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 后端开发规范
+
+## FastAPI + Python 开发规范
+
+### 架构设计
+- 采用领域驱动设计（DDD）原则
+- 使用依赖注入和中间件模式
+- 遵循 SOLID 原则进行模块设计
+
+### 目录结构
+```
+backend/
+├── app/
+│   ├── api/           # API 路由
+│   │   ├── v1/        # API 版本控制
+│   │   └── deps.py    # 依赖注入
+│   ├── core/          # 核心配置
+│   │   ├── config.py  # 应用配置
+│   │   └── security.py # 安全相关
+│   ├── models/        # SQLAlchemy 模型
+│   ├── schemas/       # Pydantic 模式
+│   ├── services/      # 业务逻辑层
+│   ├── utils/         # 工具函数
+│   └── main.py        # 应用入口
+├── tests/             # 测试文件
+└── requirements.txt   # 依赖包
+```
+
+### 数据库设计
+- 使用 SQLAlchemy ORM 进行数据库操作
+- 使用 Alembic 进行数据库迁移
+- 所有模型必须包含创建时间和更新时间字段
+
+### API 设计
+- 使用 RESTful API 设计原则
+- 统一的响应格式和错误处理
+- 支持分页、搜索、排序功能
+- API 版本控制（/api/v1/）
+
+### 认证与授权
+- 使用 JWT Token 进行用户认证
+- 基于角色的访问控制（RBAC）
+- 支持 OAuth2 第三方登录
+
+### MCP 服务集成
+- 实现 MCP 协议的服务端
+- 提供提示词访问和管理接口
+- 支持实时数据同步
+
+### 代码质量
+- 使用 Black 进行代码格式化
+- 使用 MyPy 进行类型检查
+- 完整的单元测试覆盖
+- 详细的 API 文档（自动生成）
+- 错误监控和日志记录

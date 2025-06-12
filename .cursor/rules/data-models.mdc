@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 数据模型设计
+
+## 核心数据模型
+
+### 用户模型 (User)
+```python
+class User:
+    id: int                    # 用户ID
+    username: str              # 用户名
+    email: str                 # 邮箱
+    phone: str                 # 手机
+    password_hash: str         # 密码哈希
+    avatar_url: str           # 头像URL
+    is_active: bool           # 是否激活
+    is_premium: bool          # 是否高级用户
+    created_at: datetime      # 创建时间
+    updated_at: datetime      # 更新时间
+```
+
+### 提示词模型 (Prompt)
+```python
+class Prompt:
+    id: int                   # 提示词ID
+    name_zh: str             # 中文名称
+    name_en: str             # 英文名称
+    aliases: List[str]       # 别名列表
+    description: str         # 描述
+    content: str             # 提示词内容
+    example_input: str       # 示例输入
+    example_output: str      # 示例输出
+    usage_tips: str          # 使用技巧
+    
+    # 分类信息
+    category_id: int         # 主分类ID
+    tags: List[str]          # 标签列表
+    
+    # 适用性
+    supported_models: List[str]  # 支持的模型
+    model_types: List[str]       # 模型类型
+    use_cases: List[str]         # 使用场景
+    
+    # 状态信息
+    is_public: bool          # 是否公开
+    is_featured: bool        # 是否精选
+    status: str              # 状态：draft/published/archived
+    
+    # 评价信息
+    rating_avg: float        # 平均评分
+    rating_count: int        # 评分数量
+    usage_count: int         # 使用次数
+    
+    # 关联信息
+    author_id: int           # 作者ID
+    created_at: datetime     # 创建时间
+    updated_at: datetime     # 更新时间
+```
+
+### 分类模型 (Category)
+```python
+class Category:
+    id: int                  # 分类ID
+    name: str               # 分类名称
+    description: str        # 分类描述
+    parent_id: int          # 父分类ID
+    sort_order: int         # 排序
+    icon: str               # 图标
+    is_active: bool         # 是否启用
+```
+
+### 评分模型 (Rating)
+```python
+class Rating:
+    id: int                 # 评分ID
+    prompt_id: int         # 提示词ID
+    user_id: int           # 用户ID
+    score: int             # 评分 (1-5)
+    comment: str           # 评价内容
+    created_at: datetime   # 创建时间
+```
+
+### MCP 服务配置 (MCPService)
+```python
+class MCPService:
+    id: int                 # 服务ID
+    name: str              # 服务名称
+    endpoint: str          # 服务端点
+    api_key: str           # API密钥
+    is_active: bool        # 是否启用
+    config: dict           # 配置信息
+```
+
+## 数据关系
+- User 1:N Prompt (用户可以创建多个提示词)
+- Prompt N:1 Category (提示词属于一个分类)
+- Prompt 1:N Rating (提示词可以有多个评分)
+- Category 1:N Category (分类支持层级结构)
+- User 1:N Rating (用户可以评价多个提示词)

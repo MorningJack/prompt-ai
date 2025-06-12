@@ -1,0 +1,51 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 前端开发规范
+
+## Vue 3 + TypeScript 开发规范
+
+### 组件规范
+- 使用 Composition API 和 `<script setup>` 语法
+- 所有组件必须定义 TypeScript 接口
+- 组件文件命名采用 PascalCase，如 `PromptCard.vue`
+- 公共组件放在 `components/` 目录下
+
+### 样式规范
+- **仅使用 Tailwind CSS** 进行样式管理
+- 参考 [21st.dev](https://21st.dev/home) 的现代化设计风格
+- 使用 Magic UI 组件库提供高质量组件
+- 图标使用 Font Awesome，不使用 Emoji
+
+### 目录结构
+```
+frontend/
+├── src/
+│   ├── components/     # 公共组件
+│   │   ├── ui/        # Magic UI 组件
+│   │   ├── layout/    # 布局组件
+│   │   └── prompt/    # 提示词相关组件
+│   ├── views/         # 页面组件
+│   ├── stores/        # Pinia 状态管理
+│   ├── services/      # API 服务
+│   ├── types/         # TypeScript 类型定义
+│   └── utils/         # 工具函数
+```
+
+### 状态管理
+- 使用 Pinia 进行状态管理
+- 每个功能模块创建独立的 store
+- Store 文件命名：`usePromptStore.ts`
+
+### API 集成
+- 使用 Axios 进行 HTTP 请求
+- 统一错误处理和响应拦截
+- 支持 MCP 服务调用
+
+### 代码质量
+- 使用 ESLint + Prettier 进行代码格式化
+- 组件和函数必须添加完整的 TypeScript 类型
+- 关键逻辑添加详细注释
+- 错误边界和加载状态处理
