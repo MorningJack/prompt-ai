@@ -3,13 +3,14 @@
 """
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 
 class UserBase(BaseModel):
     """用户基础模式"""
     username: str
-    email: EmailStr
+    email: str  # 临时改为str，避免email-validator依赖问题
+    full_name: Optional[str] = None
 
 
 class UserCreate(UserBase):
@@ -20,13 +21,20 @@ class UserCreate(UserBase):
 class UserUpdate(BaseModel):
     """用户更新模式"""
     username: Optional[str] = None
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None  # 临时改为str，避免email-validator依赖问题
+    full_name: Optional[str] = None
+    bio: Optional[str] = None
+    location: Optional[str] = None
+    website: Optional[str] = None
     avatar_url: Optional[str] = None
 
 
 class UserInDBBase(UserBase):
     """数据库中的用户基础模式"""
     id: int
+    bio: Optional[str] = None
+    location: Optional[str] = None
+    website: Optional[str] = None
     avatar_url: Optional[str] = None
     is_active: bool
     is_premium: bool

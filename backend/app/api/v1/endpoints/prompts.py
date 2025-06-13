@@ -1,7 +1,7 @@
 """
 提示词相关的API端点
 """
-from typing import Any, Optional
+from typing import Any, Optional, List
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from ....core.database import get_db
@@ -185,4 +185,25 @@ async def delete_prompt(
     
     # 删除提示词
     prompt_service.delete(prompt_id)
-    return {"message": "提示词已删除"} 
+    return {"message": "提示词已删除"}
+
+
+@router.get("/user/{user_id}", response_model=List[Prompt])
+def get_user_prompts(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    获取指定用户的提示词（仅限用户本人或管理员）
+    """
+    # 权限检查：只能查看自己的提示词，除非是管理员
+    if current_user.id != user_id and not getattr(current_user, 'is_superuser', False):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="没有权限访问其他用户的提示词"
+        )
+    
+    prompt_service = PromptService(db)
+    prompts = prompt_service.get_prompts_by_user(user_id=user_id)
+    return prompts 

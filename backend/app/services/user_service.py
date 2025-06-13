@@ -30,7 +30,8 @@ class UserService:
         db_user = User(
             username=user_create.username,
             email=user_create.email,
-            password_hash=password_hash
+            password_hash=password_hash,
+            full_name=user_create.full_name
         )
         self.db.add(db_user)
         self.db.commit()

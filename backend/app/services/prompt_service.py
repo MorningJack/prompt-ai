@@ -112,4 +112,10 @@ class PromptService:
         self.db.query(Prompt).filter(Prompt.id == prompt_id).update(
             {Prompt.usage_count: Prompt.usage_count + 1}
         )
-        self.db.commit() 
+        self.db.commit()
+
+    def get_prompts_by_user(self, user_id: int, skip: int = 0, limit: int = 100):
+        """获取指定用户的所有提示词"""
+        return self.db.query(Prompt).filter(
+            Prompt.author_id == user_id
+        ).offset(skip).limit(limit).all() 

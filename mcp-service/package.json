@@ -1,0 +1,32 @@
+{
+  "name": "prompt-ai-mcp-service",
+  "version": "1.0.0",
+  "description": "个人MCP服务 - 提示词AI管理平台的模型上下文协议服务",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "watch": "tsx watch src/index.ts"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "prompt",
+    "llm"
+  ],
+  "author": "Prompt AI Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+} 
